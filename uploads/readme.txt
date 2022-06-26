@@ -1,0 +1,1 @@
+so the server can see an empty folder
