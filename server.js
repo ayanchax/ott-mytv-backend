@@ -11,7 +11,7 @@ const path = require("path");
 const {
   routeErrorHandler,
 } = require("./routes/api/common/route-errors/error-handler");
-const { API_VERSION } = require("./config/constants");
+const { V1: API_VERSION } = require("./config/constants");
 const pingServerRouter = require("./routes/api/common/ping/ping");
 const {
   SERVER_STARTED,
@@ -31,7 +31,7 @@ var corsOptions = {
     "x-tfa",
   ],
   exposedHeaders: ["sessionId", "Content-Type", "authorization"],
-  methods: ['OPTIONS, GET, POST, PUT, PATCH, DELETE'],
+  methods: ["OPTIONS, GET, POST, PUT, PATCH, DELETE"],
   origin: ["*"],
 };
 // Cors End
@@ -80,6 +80,7 @@ app.use(setCache);
 //Start: Swagger configuration
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
+const userManagementRouter = require("./routes/api/v1/data/management/private/userManagementRouter");
 
 const options = {
   swaggerDefinition: {
@@ -104,7 +105,10 @@ const options = {
       },
     },
   },
-  apis: [`./routes/api/common/ping/ping.js`],
+  apis: [
+    `./routes/api/common/ping/ping.js`,
+    `./routes/api/${API_VERSION}/data/management/private/userManagementRouter.js`,
+  ],
 };
 const oasDefinition = swaggerJsdoc(options);
 const swaggerOptions = {
@@ -117,15 +121,18 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(oasDefinition, swaggerOptions)
 );
-app.get(`/${constants.APPLICATION_BACKEND_NAME}/${constants.API_VERSION}/swagger`, function(req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(oasDefinition);
-});
+app.get(
+  `/${constants.APPLICATION_BACKEND_NAME}/${constants.V1}/swagger`,
+  function (req, res) {
+    res.setHeader("Content-Type", "application/json");
+    res.send(oasDefinition);
+  }
+);
 console.log(`${SWAGGER_DOCUMENTATION_VERIFIED}`);
 //End: Swagger configuration
 
 //Connect to our database instance, activate all our application routes/endpoints, apply authentication strategy for sensitive/private routes, handle invalid routes & turn on the application server.
-mongoUtil.connectToServer(function (err) {
+mongoUtil.connectToMongoose(function (err) {
   if (err) {
     return;
   }
@@ -140,7 +147,9 @@ mongoUtil.connectToServer(function (err) {
 
   //private user routers
 
-  // private admin routers
+  // private user data management/administrative routers, as of now build these routers without passport strategy, when UI is build for administration, protect these routes with passport
+
+  app.use(`/api/${API_VERSION}/manage/user/`, userManagementRouter);
 
   //  common route error handling router
   app.use(routeErrorHandler());
