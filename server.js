@@ -31,7 +31,7 @@ var corsOptions = {
     "x-tfa",
   ],
   exposedHeaders: ["sessionId", "Content-Type", "authorization"],
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  methods: ['OPTIONS, GET, POST, PUT, PATCH, DELETE'],
   origin: ["*"],
 };
 // Cors End
@@ -117,6 +117,10 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(oasDefinition, swaggerOptions)
 );
+app.get(`/${constants.APPLICATION_BACKEND_NAME}/${constants.API_VERSION}/swagger`, function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(oasDefinition);
+});
 console.log(`${SWAGGER_DOCUMENTATION_VERIFIED}`);
 //End: Swagger configuration
 
