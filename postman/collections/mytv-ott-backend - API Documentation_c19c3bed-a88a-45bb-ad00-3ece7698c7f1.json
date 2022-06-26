@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "2251fff6-d9e0-49ca-b2d5-d2927682accf",
+		"name": "mytv-ott-backend - API Documentation",
+		"description": "mytv-ott-backend - API Documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Endpoint for pinging the back end service.",
+			"id": "fe35dc05-4deb-4fc1-aa71-fdd2cbc3a7fb",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/common/ping/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"common",
+						"ping",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "b9b41901-c91d-493a-8d11-c95b99ebb077",
+					"name": "You have succesfully pinged the mytv-ott-backend API service.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/common/ping/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"common",
+								"ping",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": ""
+				},
+				{
+					"id": "f942bffd-0589-450d-a817-50cdc9fd705b",
+					"name": "The route you are trying to access is unavailable.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/common/ping/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"common",
+								"ping",
+								""
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": ""
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"id": "4201ea71-a6d1-456e-ab95-bc832530442b",
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
