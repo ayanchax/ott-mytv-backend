@@ -7,6 +7,7 @@ const api_messages = {
     ERROR: "Error occured.",
     SERVER_STARTED:'Server started successfully on port ',
     ROUTES_VERIFIED:'API routes verified successfully.',
+    SWAGGER_DOCUMENTATION_VERIFIED:'Verified swagger API documentation.',
     OPERATION_FAILED: "Operation failed. Please try again or contact support if problem persists.",
     PING_OK:`You have succesfully pinged the ${APPLICATION_BACKEND_NAME} API service.`,
     CONNECTION_OK:`You have succesfully connected to the ${APPLICATION_BACKEND_NAME} API service database server.`,

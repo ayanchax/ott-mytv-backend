@@ -8,6 +8,16 @@ var constants = require("./config/constants");
 const compression = require("compression");
 require("dotenv").config();
 const path = require("path");
+const {
+  routeErrorHandler,
+} = require("./routes/api/common/route-errors/error-handler");
+const { API_VERSION } = require("./config/constants");
+const pingServerRouter = require("./routes/api/common/ping/ping");
+const {
+  SERVER_STARTED,
+  ROUTES_VERIFIED,
+  SWAGGER_DOCUMENTATION_VERIFIED,
+} = require("./routes/api/messages/api-messages");
 // Our static file location are stored in public folder under root directory
 app.use(express.static(path.join(__dirname, "public")));
 //Cors Start
@@ -70,15 +80,6 @@ app.use(setCache);
 //Start: Swagger configuration
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
-const {
-  routeErrorHandler,
-} = require("./routes/api/common/route-errors/error-handler");
-const { API_VERSION } = require("./config/constants");
-const pingServerRouter = require("./routes/api/common/ping/ping");
-const {
-  SERVER_STARTED,
-  ROUTES_VERIFIED,
-} = require("./routes/api/messages/api-messages");
 
 const options = {
   swaggerDefinition: {
@@ -103,18 +104,20 @@ const options = {
       },
     },
   },
-  apis: ["../routes/common/ping/ping.js"],
+  apis: [`./routes/api/common/ping/ping.js`],
 };
 const oasDefinition = swaggerJsdoc(options);
 const swaggerOptions = {
   customSiteTitle: `${constants.APPLICATION_BACKEND_NAME} - API Documentation`,
   customCss: ".topbar { display: none }",
 };
+
 app.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(oasDefinition, swaggerOptions)
 );
+console.log(`${SWAGGER_DOCUMENTATION_VERIFIED}`);
 //End: Swagger configuration
 
 //Connect to our database instance, activate all our application routes/endpoints, apply authentication strategy for sensitive/private routes, handle invalid routes & turn on the application server.
