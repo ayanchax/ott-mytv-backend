@@ -1,0 +1,32 @@
+openapi: '3.0.2'
+
+info:
+  title: mytv-ott-backend- API Documentation 
+  version: '1.0'
+
+servers:
+  - url: http://localhost:3000/api-docs/#/
+    description: API server
+components:
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+
+security:
+  - bearerauth: []
+
+paths:
+  /:
+    get:
+      tags:
+        - "Ping"
+      description: 'Endpoint for pinging the back end service.'
+      responses:
+        '200':
+          description: You have succesfully pinged the mytv-ott-backend API service..
+        '500':
+          description: 'The route you are trying to access is unavailable.'
+           

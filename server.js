@@ -126,7 +126,7 @@ mongoUtil.connectToServer(function (err) {
     return;
   }
   const authMiddleWare = require("./middleware/auth");
-  // apply jwt authentication strategy to passport(which is our application's middleware to authenticate sensitive routes) throughout the lifecycle of the application server.
+  // apply jwt authentication strategy routing to passport(which is our application's middleware to authenticate sensitive routes) throughout the lifecycle of the application server.
   authMiddleWare.applyJWTAuthenticationStrategy(passport);
 
   // common ping/health check router
