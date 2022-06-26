@@ -91,6 +91,40 @@
 					"body": ""
 				}
 			]
+		},
+		{
+			"name": "Add User",
+			"id": "1b853eed-aefb-4bcb-b640-6e2b1fb673a0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mobile\":\"9831305664\",\r\n    \"service_provider_id\":\"fe58fd9c-c0b8-4d52-97ca-442950d193a0\",\r\n    \"password\":\"P@ssw0rd\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/manage/user/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"manage",
+						"user",
+						"add"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"variable": [
